@@ -20,7 +20,11 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return response()->json([
+            'message' => 'ok',
+            'categories' => $categories
+        ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -91,7 +95,6 @@ class CategoriesController extends Controller
                 } else {
                     $category->fill($record)->save();
                 }
-
             }
             return response()->json([
                 'message' => '成功',
