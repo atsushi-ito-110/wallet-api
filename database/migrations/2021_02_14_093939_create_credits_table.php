@@ -15,7 +15,6 @@ class CreateCreditsTable extends Migration
     {
         Schema::create('credits', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->date('billing_month');
             $table->boolean('closed');
             // $table->foreignId('user_id');
