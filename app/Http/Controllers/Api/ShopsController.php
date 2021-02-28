@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\Category;
+use App\Models\Shop;
 use App\Http\Controllers\Controller;
 
 use League\Csv\Reader;
 use League\Csv\Statement;
 
-class CategoriesController extends Controller
+class ShopsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +21,10 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $shops = Shop::all();
         return response()->json([
             'message' => 'ok',
-            'categories' => $categories
+            'shops' => $shops
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
@@ -88,12 +89,12 @@ class CategoriesController extends Controller
 
             $records = $stmt->process($csv);
             foreach ($records as $record) {
-                $category = Category::find($record['id']);
+                $shop = Shop::find($record['id']);
                 // memo: find or createの方がいいかも
-                if (is_null($category)) {
-                    Category::create($record);
+                if (is_null($shop)) {
+                    Shop::create($record);
                 } else {
-                    $category->fill($record)->save();
+                    $shop->fill($record)->save();
                 }
             }
             return response()->json([
@@ -107,5 +108,4 @@ class CategoriesController extends Controller
             ], 500, [], JSON_UNESCAPED_UNICODE);
         }
     }
-
 }

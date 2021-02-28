@@ -19,6 +19,16 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::group(['middleware' => ['api']], function(){
-    Route::resource('credits', 'App\Http\Controllers\Api\CreditsController', ['only' => ['index']]);
+    Route::resource('credits', 'App\Http\Controllers\Api\CreditsController', ['only' => ['index', 'show']]);
+    Route::post('credits/import', [
+        'as' => 'credits.import','uses' => 'App\Http\Controllers\Api\CreditsController@import',
+    ]);
     Route::resource('categories', 'App\Http\Controllers\Api\CategoriesController', ['only' => ['index']]);
+    Route::post('categories/import', [
+        'as' => 'categories.import','uses' => 'App\Http\Controllers\Api\CategoriesController@import',
+    ]);
+    Route::resource('shops', 'App\Http\Controllers\Api\ShopsController', ['only' => ['index']]);
+    Route::post('shops/import', [
+        'as' => 'shops.import','uses' => 'App\Http\Controllers\Api\ShopsController@import',
+    ]);
 });

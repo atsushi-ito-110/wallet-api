@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCreditDetailsTable extends Migration
+class CreateShopsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateCreditDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('credit_details', function (Blueprint $table) {
+        Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('credit_id');
-            $table->foreignId('category_id');
             $table->string('name');
-            $table->date('billing_date');
-            $table->integer('amount');
+            $table->foreignId('category_id');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateCreditDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('credit_details');
+        Schema::dropIfExists('shops');
     }
 }
