@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group(['middleware' => ['api']], function(){
+    Route::resource('credits', 'App\Http\Controllers\Api\CreditsController', ['only' => ['index']]);
+    Route::resource('categories', 'App\Http\Controllers\Api\CategoriesController', ['only' => ['index']]);
 });
