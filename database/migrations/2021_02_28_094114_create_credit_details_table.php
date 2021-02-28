@@ -16,7 +16,7 @@ class CreateCreditDetailsTable extends Migration
         Schema::create('credit_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('credit_id');
-            $table->foreignId('category_id');
+            $table->foreignId('shop_id');
             $table->string('name');
             $table->date('billing_date');
             $table->integer('amount');
