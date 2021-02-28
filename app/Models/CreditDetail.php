@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class CreditDetail extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'credit_id',
+        'shop_id',
+        'name',
+        'billing_date',
+        'amount',
+    ];
 }
