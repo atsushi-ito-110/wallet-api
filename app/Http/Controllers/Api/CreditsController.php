@@ -87,6 +87,7 @@ class CreditsController extends Controller
     public function import(Request $request)
     {
         Log::info('import');
+        Log::Info($request);
         try {
 
             $billing_month = date('Y-m-d', strtotime("{$request->billing_month}01"));
@@ -116,7 +117,7 @@ class CreditsController extends Controller
                 }
 
                 $record['ご利用場所'] = preg_replace('/[　]+$/u', '', $record['ご利用場所']);
-                Log::info($record);
+                // Log::info($record);
                 $shop_id = Shop::where('name', $record['ご利用場所'])->first()->id ?? null;
                 if (mb_strpos($record['ご利用場所'], 'ソフトバンクＭ') === 0) {
                     $shop_id = Shop::where('name', 'ソフトバンクＭ')->first()->id ?? null;
