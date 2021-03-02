@@ -47,12 +47,20 @@ class CreditsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($year_month)
     {
-        $credit = Credit::with('credit_details')->find($id);
+        Log::info($year_month);
+        $billing_month = date('Y-m-d', strtotime("{$year_month}-01"));
+        Log::info($billing_month);
+        $credit = Credit::where('billing_month', $billing_month)
+            ->with('credit_details')
+            ->first();
+        // Log::info($credit);
+        // $credit->with('credit_details')->get();
+        // Log::info($credit);
         return response()->json([
             'message' => 'ok',
-            'credits' => $credit
+            'credit' => $credit
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
