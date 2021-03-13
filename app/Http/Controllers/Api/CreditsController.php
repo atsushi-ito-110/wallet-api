@@ -23,7 +23,7 @@ class CreditsController extends Controller
      */
     public function index()
     {
-        $credits = Credit::all();
+        $credits = Credit::orderBy('billing_month', 'desc')->get();
         return response()->json([
             'message' => 'ok',
             'credits' => $credits
