@@ -66,7 +66,9 @@ class CreditsController extends Controller
         $billing_month = date('Y-m-d', strtotime("{$year_month}-01"));
         Log::info($billing_month);
         $credit = Credit::where('billing_month', $billing_month)
-            ->with('credit_details')
+            ->with(['credit_details' => function ($query) {
+                $query->orderBy('billing_date', 'desc');
+            }])
             ->first();
         // Log::info($credit);
         // $credit->with('credit_details')->get();
