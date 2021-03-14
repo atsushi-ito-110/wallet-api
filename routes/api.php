@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::group(['middleware' => ['api']], function(){
-    Route::resource('credits', 'App\Http\Controllers\Api\CreditsController', ['only' => ['index', 'show']]);
+    Route::resource('credits', 'App\Http\Controllers\Api\CreditsController', ['only' => ['index', 'show', 'store']]);
     Route::post('credits/import', [
         'as' => 'credits.import','uses' => 'App\Http\Controllers\Api\CreditsController@import',
     ]);
