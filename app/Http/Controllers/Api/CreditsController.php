@@ -45,7 +45,7 @@ class CreditsController extends Controller
         } else {
             $billing_month = $last_month->billing_month;
         }
-        $billing_month = date('Y-m-01', strtotime(date().'+1 month'));
+        $billing_month = date('Y-m-01', strtotime(date($billing_month).'+1 month'));
         if (date('Y-m-d') < $billing_month) {
             return response()->json([
                 'message' => '翌月以降のデータは作成できません。'
